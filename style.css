@@ -7,7 +7,7 @@
 
 @font-face {
     font-family: 'PixelFont';
-    src: url('/media/PublicPixel.ttf') format('truetype');
+    src: url('PublicPixel.ttf') format('truetype');
 }
 
 body{
@@ -29,7 +29,7 @@ body{
 }
 
 #background{
-    background-image: url(/media/bmo.jpeg);
+    background-image: url(bmo.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -45,7 +45,7 @@ body{
 }
 
 .circle{
-    background-image: url(/media/portal.png);
+    background-image: url(portal.png);
     background-size: contain;
     border-radius: 50%;
     width: 100px;
@@ -59,7 +59,7 @@ body{
 }
 
 .circle.active{
-    background-image: url(/media/jake.jpeg);
+    background-image: url(jake.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -92,7 +92,7 @@ button{
 }
 
 .modal{
-    background-image: url(/media/overlay.jpeg);
+    background-image: url(overlay.jpeg);
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
