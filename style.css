@@ -36,6 +36,7 @@ body{
     min-width: 1200px;
     min-height: 900px;
 }
+
 .circles{
     display: flex;
     flex-wrap: wrap;
@@ -44,7 +45,8 @@ body{
 }
 
 .circle{
-    background-color: rgb(143, 195, 146);
+    background-image: url(/media/portal.png);
+    background-size: contain;
     border-radius: 50%;
     width: 100px;
     height: 100px;
