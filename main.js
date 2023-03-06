@@ -42,7 +42,6 @@ const clickCircle = (i) => {
     if(i !== active){
         return endGame()
     }
-    console.log('circle index: ', i)
     score+=1
     rounds = 0
     scoreSpan.textContent = score
@@ -66,10 +65,9 @@ const startGame = () =>{
     circles[nextActive].classList.toggle('active')
     circles[active].classList.remove('active')
     active = nextActive;
-    timer = setTimeout(startGame, pace) // we can write just 1000, but we declare "pace" - above
+    timer = setTimeout(startGame, pace)
     pace -=10
     rounds++
-    console.log(nextActive)
     function pickNew (active){
         const nextActive = getRndInt (0, 3)
         if (nextActive !== active) {
@@ -81,11 +79,19 @@ const startGame = () =>{
 
 const endGame = () =>{
     endAudio.play()
-    scoreEnd.textContent = score
+    if (score<10){
+        scoreEnd.textContent = `Your score is: ${score}, try more!`
+    }
+    else  if (20>score>10){
+        scoreEnd.textContent = `Your score is: ${score}, not bad!!`
+    } 
+    else  if (score>20){
+        scoreEnd.textContent = `Your score is: ${score}, you're good!!!`
+    } 
+    
     overlay.style.visibility = 'visible'
     endButton.classList.remove('hidden')
     startButton.classList.add('hidden')
-    console.log('game ended')
     clearTimeout(timer)
 }
 

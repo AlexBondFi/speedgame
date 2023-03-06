@@ -95,16 +95,17 @@ button{
     background-size: 100%;
     background-position: center;
     color: black;
-    height: 25vh;
-    width: 25vw;
+    height: 30rem;
+    width: 50rem;
     border-radius: 5px;
     position: relative;
+    padding-top: 8rem;
 }
 
 .modal button{
     position: absolute;
-    top: 2rem;
-    right: 0;
+    top: 6rem;
+    right: 1rem;
     margin: 0;
     border: none;
     background-color: transparent;
