@@ -43,6 +43,7 @@ const clickCircle = (i) => {
         return endGame()
     }
     score+=1
+    disableCircles()
     rounds = 0
     scoreSpan.textContent = score
 }
@@ -50,6 +51,11 @@ const clickCircle = (i) => {
 const enableCircles = () =>{
     circles.forEach(circle =>{
         circle.style.pointerEvents = 'auto'
+    })
+}
+const disableCircles = () =>{
+    circles.forEach(circle =>{
+        circle.style.pointerEvents = 'none'
     })
 }
 
