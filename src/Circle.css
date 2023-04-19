@@ -1,0 +1,13 @@
+.circle{
+    background-image: url(portal.png);
+    background-size: contain;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    pointer-events: none;
+    cursor: pointer;
+}
