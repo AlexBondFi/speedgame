@@ -7,7 +7,9 @@ class App extends Component {
       score: 0,
       current: 0,
       showModal: false,
-      circles: [1,2,3]
+      circles: [1,2,3],
+      showStart: true,
+      showEnd: false
     }
 
     modalHandler = (e) => {
@@ -25,13 +27,24 @@ class App extends Component {
     }
 
     randomizer = () => {
+      console.log('rand')
       let nextActive;
       do {
         nextActive = Math.floor(Math.random() * 3) + 1;
       } while (nextActive === this.state.current);
   
       this.setState({
-        current: nextActive
+        current: nextActive,
+        showStart: false,
+        showEnd: true
+      });
+    };
+
+    endHandler = () => {
+      this.modalHandler();
+      this.setState({
+        showStart: true,
+        showEnd: false,
       });
     };
 
@@ -44,8 +57,8 @@ class App extends Component {
           {this.state.circles.map(circle=>(
           <Circle key={circle} click={()=> this.clickHandler(circle)}/>))}
         </div>
-        <button id="start" onClick={this.randomizer}>PLAY</button>
-        <button id="end" className="hidden">END</button>
+        {this.state.showStart && <button id="start" onClick={this.randomizer}>PLAY</button>}
+        {this.state.showEnd && <button id="end" onClick={this.endHandler}>END</button>}
       </div>
     );
   }
