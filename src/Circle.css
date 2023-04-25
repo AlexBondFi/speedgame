@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     margin: 1rem;
-    pointer-events: none;
+    /* pointer-events: none; */
     cursor: pointer;
 }
 
