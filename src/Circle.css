@@ -11,3 +11,9 @@
     pointer-events: none;
     cursor: pointer;
 }
+
+.circle.active {
+    border-style: dashed;
+    background-color: #FF0000;
+    background-image: none;
+  }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Circle from './Circle';
+import Modal from './Modal';
 
 class App extends Component {
     state = {
@@ -9,7 +10,7 @@ class App extends Component {
       showModal: false,
       circles: [1,2,3],
       gameStart: false,
-      delay: 2000
+      showGameOver: false
     }
 
     modalHandler = () => {
@@ -46,19 +47,19 @@ class App extends Component {
 
 
     startHandler = () => {
-      const timer = setTimeout(()=>{this.randomizer()}, 2000);
+      this.timer = setInterval(()=>{this.randomizer()}, 1000);
       this.setState({
         gameStart: true
       })
     };
-
- 
-
-
+    
+    
     endHandler = () => {
+      clearInterval(this.timer);
       this.modalHandler();
       this.setState({
-        gameStart: false
+        gameStart: false,
+        showGameOver: true
       });
     };
 
@@ -71,10 +72,11 @@ class App extends Component {
         <p>SCORE: <span>{this.state.score}</span></p>
         <div className='gamezone'>
           {this.state.circles.map(circle=>(
-          <Circle key={circle} click={()=> this.clickHandler(circle)}/>))}
+          <Circle key={circle} isActive={circle === this.state.current} click={()=> this.clickHandler(circle)}/>))}
         </div>
         {!this.state.gameStart && <button id="start" onClick={this.startHandler}>PLAY</button>}
         {this.state.gameStart && <button id="end" onClick={this.endHandler}>END</button>}
+        {this.state.showGameOver && <Modal/>}
       </div>
     );
   }

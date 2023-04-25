@@ -1,9 +1,12 @@
 import React from 'react';
 
-const Modal = () => {
+const Modal = (props) => {
     return (
-        <div>
-            
+        <div className='overlay'>
+            <div className='modal'>
+                <p>X</p>
+            <p>GAMEOVER <span>Score is:{props.score} points</span></p>
+            </div>
         </div>
     );
 };
