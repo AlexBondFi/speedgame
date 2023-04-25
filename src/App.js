@@ -8,12 +8,11 @@ class App extends Component {
       current: 0,
       showModal: false,
       circles: [1,2,3],
-      showStart: true,
-      showEnd: false
+      gameStart: false,
+      delay: 2000
     }
 
-    modalHandler = (e) => {
-      e.preventDefault()
+    modalHandler = () => {
       this.setState({
         showModal: !this.state.showModal
       })
@@ -21,9 +20,13 @@ class App extends Component {
 
     clickHandler = (circle) => {
       console.log(circle)
+      if(circle !== this.state.current){
+        this.endHandler();
+      }
       this.setState({
-        score: this.state.score +10
-      })
+        score: this.state.score +10,
+      });
+      this.randomizer();
     }
 
     randomizer = () => {
@@ -34,19 +37,32 @@ class App extends Component {
       } while (nextActive === this.state.current);
   
       this.setState({
-        current: nextActive,
-        showStart: false,
-        showEnd: true
+        current: nextActive
       });
     };
+
+    
+
+
+
+    startHandler = () => {
+      const timer = setTimeout(()=>{this.randomizer()}, 2000);
+      this.setState({
+        gameStart: true
+      })
+    };
+
+ 
+
 
     endHandler = () => {
       this.modalHandler();
       this.setState({
-        showStart: true,
-        showEnd: false,
+        gameStart: false
       });
     };
+
+
 
   render() {
     return (
@@ -57,8 +73,8 @@ class App extends Component {
           {this.state.circles.map(circle=>(
           <Circle key={circle} click={()=> this.clickHandler(circle)}/>))}
         </div>
-        {this.state.showStart && <button id="start" onClick={this.randomizer}>PLAY</button>}
-        {this.state.showEnd && <button id="end" onClick={this.endHandler}>END</button>}
+        {!this.state.gameStart && <button id="start" onClick={this.startHandler}>PLAY</button>}
+        {this.state.gameStart && <button id="end" onClick={this.endHandler}>END</button>}
       </div>
     );
   }
