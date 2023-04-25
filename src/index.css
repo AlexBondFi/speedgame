@@ -57,7 +57,9 @@ h1{
   position: absolute;
   top: 50%;
   left: 50%;
+  height: 13rem;
   transform: translate(-50%, -50%);
+  background-color: white;
 }
 
 .overlay.hidden {
@@ -65,4 +67,18 @@ h1{
 }
 .overlay.visible {
   display: block;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.text{
+  margin: 6rem;
 }

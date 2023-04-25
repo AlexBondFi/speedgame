@@ -17,12 +17,13 @@ class App extends Component {
       showGameOver: false,
       soundStart: new Audio(startSound),
       soundEnd: new Audio(endSound),
-      soundClick: new Audio(clickSound)
+      soundClick: new Audio(clickSound),
+      modalVisible: false
     }
 
     modalHandler = () => {
       this.setState({
-        showModal: !this.state.showModal
+        modalVisible: !this.state.modalVisible
       })
     }
 
@@ -90,7 +91,7 @@ class App extends Component {
         </div>
         {!this.state.gameStart && <button id="start" onClick={this.startHandler}>PLAY</button>}
         {this.state.gameStart && <button id="end" onClick={this.endHandler}>END</button>}
-        {this.state.showGameOver && <Modal/>}
+        {this.state.showGameOver && <Modal score={this.state.score} modalHandler={this.modalHandler}/>}
       </div>
     );
   }
