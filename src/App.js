@@ -12,24 +12,20 @@ class App extends Component {
       current: 0,
       rounds: 0,
       showModal: false,
-      circles: [1,2,3],
+      circles: [1,2,3,4],
       gameStart: false,
       showGameOver: false,
       soundStart: new Audio(startSound),
       soundEnd: new Audio(endSound),
       soundClick: new Audio(clickSound),
-      modalVisible: false
+      modalVisible: false,
+      buttonOff: true
     }
-
-    modalHandler = () => {
-      this.setState({
-        modalVisible: !this.state.modalVisible
-      })
-    }
+    
 
     clickHandler = (circle) => {
       this.state.soundClick.play();
-      console.log(circle)
+      // console.log(circle)
       if(circle !== this.state.current){
         this.endHandler();
       }
@@ -47,14 +43,15 @@ class App extends Component {
       }
       else{
         do {
-          nextActive = Math.floor(Math.random() * 3) + 1;
+
+          nextActive = Math.floor(Math.random() * 4) + 1;
+
         } while (nextActive === this.state.current);
       }
-      
-  
       this.setState({
         current: nextActive,
-        rounds: this.state.rounds +1
+        rounds: this.state.rounds +1,
+        buttonOff: false
       });
     };
 
@@ -66,18 +63,53 @@ class App extends Component {
         
       })
     };
+
+    // startHandler = () => {
+    //   this.state.soundStart.play();
+    //   let interval = 1000;
+    //   this.timer = setInterval(()=>{
+    //     this.randomizer();
+    //     interval -= 300;
+    //     clearInterval(this.timer);
+    //     this.timer = setTimeout(()=>{this.startHandler()}, interval);
+    //   }, interval);
+    //   this.setState({
+    //     gameStart: true
+    //   })
+    // };
     
+    buttonClickOn = () => {
+      this.setState({
+        buttonOff: false
+      })
+    }
+
+    buttonClickOff = () => {
+      this.setState({
+        buttonOff: true
+      })
+    }
+
     
     endHandler = () => {
+      console.log('endHandler was triggered');
       this.state.soundEnd.play();
       clearInterval(this.timer);
-      this.modalHandler();
+      // this.modalHandler();
       this.setState({
         gameStart: false,
-        showGameOver: true
+        showGameOver: true,
+        modalVisible: !this.state.modalVisible
       });
     };
 
+    modalHandler = () => {
+      console.log('modalHandler was triggered');
+      this.setState({
+        modalVisible: !this.state.modalVisible
+      })
+      
+    }
 
 
   render() {
@@ -87,11 +119,11 @@ class App extends Component {
         <p>SCORE: <span>{this.state.score}</span></p>
         <div className='gamezone'>
           {this.state.circles.map(circle=>(
-          <Circle key={circle} isActive={circle === this.state.current} click={()=> this.clickHandler(circle)}/>))}
+          <Circle key={circle} disabled={this.state.buttonOff} isActive={circle === this.state.current} click={()=> this.clickHandler(circle)}/>))}
         </div>
         {!this.state.gameStart && <button id="start" onClick={this.startHandler}>PLAY</button>}
         {this.state.gameStart && <button id="end" onClick={this.endHandler}>END</button>}
-        {this.state.showGameOver && <Modal score={this.state.score} modalHandler={this.modalHandler}/>}
+        {this.state.modalVisible && <Modal score={this.state.score} modalHandler={this.modalHandler}/>}
       </div>
     );
   }
