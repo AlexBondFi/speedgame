@@ -2,9 +2,10 @@ import React from 'react';
 import './Circle.css';
 
 const Circle = (props) => {
-    const { isActive, click } = props;
     return (
-        <div className={`circle ${isActive ? 'active' : ''}`} onClick={props.click}>
+        <div className={props.active ? 'circle active' : 'circle'} onClick={props.click} 
+        style={{pointerEvents: props.gameIsOn ? 'all' : 'none' }}>
+        
         </div>
     );
 };
